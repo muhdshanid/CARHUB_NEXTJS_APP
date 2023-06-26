@@ -12,6 +12,14 @@ interface CustomButtonProps {
     
 }
 
+type FilterProps = {
+        manufacturer?: string;
+        year?: number;
+        model?: string;
+        limit?: number;
+        fuel?: string;
+      }
+
 
 type SearchManufacturerProps = {
         manufacturer: string,
