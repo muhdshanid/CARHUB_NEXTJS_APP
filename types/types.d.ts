@@ -12,6 +12,12 @@ interface CustomButtonProps {
     
 }
 
+type ShowMoreProps = {
+        pageNumber:number,
+        isNext: boolean,
+        setLimit: (limit: number) => void
+}
+
 type FilterProps = {
         manufacturer?: string;
         year?: number;
@@ -20,6 +26,10 @@ type FilterProps = {
         fuel?: string;
       }
 
+type SearchBarProps = {
+        setManufacturer: (value: string) => void,
+        setModel: (value: string) => void
+}
 type OptionProps = {
         title: string,
         value: string
@@ -27,7 +37,8 @@ type OptionProps = {
 
 type CustomFilterProps = {
         title: string,
-        options: OptionProps[]
+        options: OptionProps[],
+        setFilter
 }
 
 type SearchManufacturerProps = {

@@ -1,18 +1,24 @@
 "use client"
 
 import { CustomFilterProps } from "@/types/types"
+import { updateSearchParams } from "@/utils"
 import { Listbox, Transition } from "@headlessui/react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { Fragment, useState } from "react"
 
 
-const CustomFilter = ({title, options}: CustomFilterProps) => {
+const CustomFilter = ({title, options, setFilter}: CustomFilterProps) => {
   const router = useRouter()
   const [selected, setSelected] = useState(options[0])
+
+  
   return (
     <div className="w-fit ">
-      <Listbox value={selected} onChange={(e) => setSelected(e)}>
+      <Listbox value={selected} onChange={(e) => {
+        setSelected(e)
+        setFilter(e.value)
+        }}>
         <div className="relative w-fit z-10">
           <Listbox.Button className={"custom-filter__btn"}>
             <span className="block truncate">{selected.title}</span>
@@ -26,7 +32,8 @@ const CustomFilter = ({title, options}: CustomFilterProps) => {
                 {
                   options.map(option => (
                     <Listbox.Option
-                    className={({active}) => `relative cursor-default py-2 px-4 select-none ${active ? "bg-primary-blue" : "text-gray-900"}`}
+                    className={({active}) => `relative cursor-default py-2 px-4 select-none 
+                    ${active ? "bg-primary-blue text-white" : "text-gray-900"}`}
                      value={option} key={option.title}>
                       {({selected}) => (
                         <span className={`block truncate ${selected ? "font-medium" : "font-normal"}`}>{option.title}</span>
